@@ -24,7 +24,8 @@ typedef enum {
   STATE_S,
   STATE_STRING,
   STATE_INTEGER,
-  STATE_IDENT
+  STATE_IDENT,
+  STATE_COMMENT
 } lexer_state;
 
 #endif

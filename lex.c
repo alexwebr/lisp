@@ -6,6 +6,7 @@ char *ident_alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char *integer_alphabet = "0123456789";
 char *skip_alphabet = "\t\n\r ";
 char *transition_alphabet = "\t\n\r ()";
+char *linebreak_alphabet = "\r\n";
 
 token_t lex_get_tok(char *buf, unsigned int buflen)
 {
@@ -19,6 +20,9 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
 
     switch (state) {
       case STATE_S:
+        if (c == '#')
+          state = STATE_COMMENT;
+
         if (c == '"')
           state = STATE_STRING;
 
@@ -77,6 +81,13 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
         }
 
         break;
+
+
+      case STATE_COMMENT:
+        if (strchr(linebreak_alphabet, c))
+          state = STATE_S;
+
+        break;
     }
   }
 
@@ -91,6 +102,6 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
     exit(1);
   }
 
-  if (state == STATE_S)
+  if (state == STATE_S || state == STATE_COMMENT)
     return (token_t) { .type = TOK_EOF, .starti = ci, .endi = ci };
 }
