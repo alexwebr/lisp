@@ -50,7 +50,7 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
 
         if (!isprint(c)) {
           buf[ci] = '\0';
-          printf("Illegal character in string, valid part shown: %s\n", &buf[ci - 1]);
+          printf("Illegal character in string, valid part shown: %s\n", &buf[tok_start]);
           exit(1);
         }
 
@@ -63,7 +63,7 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
 
         if (!strchr(ident_alphabet, c)) {
           buf[ci] = '\0';
-          printf("Illegal character in ident, valid part shown: %s\n", &buf[ci - 1]);
+          printf("Illegal character in ident, valid part shown: %s\n", &buf[tok_start]);
           exit(1);
         }
 
@@ -76,7 +76,7 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
 
         if (!strchr(integer_alphabet, c)) {
           buf[ci] = '\0';
-          printf("Illegal character in integer, valid part shown: %s\n", &buf[ci - 1]);
+          printf("Illegal character in integer, valid part shown: %s\n", &buf[tok_start]);
           exit(1);
         }
 
