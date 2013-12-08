@@ -2,22 +2,19 @@
 
 int main()
 {
-  char buf[8192];
+  char buf[100000];
 
   int c = 0;
   unsigned int i = 0;
   while ((c = getchar()) != EOF)
     buf[i++] = c & 0xFF;
 
-  printf("Read %d characters\n", i);
-
   while (1) {
-    usleep(100000);
     token_t token = lex_get_tok(buf, i);
 
     switch(token.type) {
       case TOK_EOF:
-        puts("EOF, exiting!");
+        puts("EOF");
         exit(0);
         break;
 

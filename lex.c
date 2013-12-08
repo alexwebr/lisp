@@ -15,7 +15,6 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
   lexer_state state = STATE_S;
 
   while (ci < buflen) {
-    printf("%d\n", ci);
     char c = buf[ci++];
 
     switch (state) {
@@ -81,5 +80,17 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
     }
   }
 
-  return (token_t) { .type = TOK_EOF, .starti = ci, .endi = ci };
+  if (state == STATE_IDENT)
+    return (token_t) { .type = TOK_IDENT, .starti = tok_start, .endi = ci };
+
+  if (state == STATE_INTEGER)
+    return (token_t) { .type = TOK_INTEGER, .starti = tok_start, .endi = ci };
+
+  if (state == STATE_STRING) {
+    puts("Reached end-of-file with an unterminated string");
+    exit(1);
+  }
+
+  if (state == STATE_S)
+    return (token_t) { .type = TOK_EOF, .starti = ci, .endi = ci };
 }
