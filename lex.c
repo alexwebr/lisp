@@ -104,4 +104,7 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
 
   if (state == STATE_S || state == STATE_COMMENT)
     return (token_t) { .type = TOK_EOF, .starti = ci, .endi = ci };
+
+  puts("Invalid lexer state, bailing...");
+  exit(1);
 }
