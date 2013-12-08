@@ -1,0 +1,16 @@
+ROOT
+  SEXPR
+    ATOM
+  SEXPR
+  SEXPR
+    ATOM
+    ATOM
+    ATOM
+  SEXPR
+    ATOM
+    SEXPR
+      ATOM
+  SEXPR
+    SEXPR
+      SEXPR
+        ATOM
