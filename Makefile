@@ -5,7 +5,7 @@ parser_driver: lex.o stack.o parse.o parser_driver.o
 clean:
 	rm -f *.o *_driver *_driver_output
 
-test: lexer_driver parser_driver
+tests: lexer_driver parser_driver
 	# Test lexer
 	./lexer_driver < lexer_input > lexer_driver_output
 	diff lexer_driver_output lexer_output
