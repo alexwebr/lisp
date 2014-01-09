@@ -75,6 +75,16 @@ tree_node_t *create_parse_tree(char *buf, unsigned int buflen)
           exit(1);
         }
 
+        // Validate that there are no atoms at the top level
+        p = root->child;
+        while (p != NULL) {
+          if (p->type == NODE_ATOM) {
+            puts("Atom outside of sexpr");
+            exit(1);
+          }
+          p = p->sibling;
+        }
+
         return root;
         break;
     }
