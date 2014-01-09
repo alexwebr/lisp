@@ -14,4 +14,7 @@ typedef struct tree_node_t {
   token_t token;
 } tree_node_t;
 
+void append_child(tree_node_t *parent, tree_node_t *child);
+tree_node_t *create_parse_tree(char *buf, unsigned int buflen);
+
 #endif
