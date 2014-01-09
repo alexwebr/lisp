@@ -14,8 +14,4 @@ typedef struct tree_node_t {
   token_t token;
 } tree_node_t;
 
-tree_node_t *peek(void);
-tree_node_t *pop(void);
-void push(tree_node_t *node);
-
 #endif
