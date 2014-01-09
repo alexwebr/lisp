@@ -1,6 +1,7 @@
 #include "lexer.h"
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 char *ident_alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char *integer_alphabet = "0123456789";
