@@ -1,3 +1,6 @@
+CC=clang
+CFLAGS=-pedantic -Werror -Wall -Wextra -std=c99
+
 lexer_driver: lexer.o lexer_driver.o
 
 parser_driver: lexer.o stack.o parser.o parser_driver.o
