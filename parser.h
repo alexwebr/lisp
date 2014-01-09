@@ -1,4 +1,4 @@
-#include "lex.h"
+#include "lexer.h"
 
 #ifndef _PARSE_H
 #define _PARSE_H

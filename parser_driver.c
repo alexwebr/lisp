@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "parser.h"
 
 // Recursive function that prints the tree :)
 void print_tree(unsigned int depth, tree_node_t *p)

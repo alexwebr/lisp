@@ -1,6 +1,6 @@
-lexer_driver: lex.o lexer_driver.o
+lexer_driver: lexer.o lexer_driver.o
 
-parser_driver: lex.o stack.o parse.o parser_driver.o
+parser_driver: lexer.o stack.o parser.o parser_driver.o
 
 clean:
 	rm -f *.o *_driver *_driver_output
