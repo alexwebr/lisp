@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-pedantic -Werror -Wall -Wextra -std=c99
+CFLAGS=-g -pedantic -Werror -Wall -Wextra -std=c99
 
 lexer_driver: lexer.o lexer_driver.o
 
