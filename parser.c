@@ -50,6 +50,8 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
       case TOK_INTEGER:
       case TOK_STRING:
         p = malloc(sizeof(tree_t));
+        p->child = NULL;
+        p->sibling = NULL;
         p->type = NODE_ATOM;
         p->token = token;
 
