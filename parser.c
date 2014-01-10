@@ -25,7 +25,10 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
   root->sibling = NULL;
 
   // Stack initialization
-  push(root);
+  stack_t *stack = malloc(sizeof(stack_t));
+  stack->next = NULL;
+  stack->data = NULL;
+  push(stack, root);
 
   // Temporary pointer
   tree_t *p;
@@ -40,8 +43,8 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
         p->sibling = NULL;
         p->type = NODE_SEXPR;
 
-        append_child(peek(), p);
-        push(p);
+        append_child(peek(stack), p);
+        push(stack, p);
 
         break;
 
@@ -55,15 +58,15 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
         p->type = NODE_ATOM;
         p->token = token;
 
-        append_child(peek(), p);
+        append_child(peek(stack), p);
 
         break;
 
 
       case TOK_RPAREN:
-        pop();
+        pop(stack);
 
-        if (peek() == NULL) {
+        if (peek(stack) == NULL) {
           puts("Closed non-existent sexpr");
           exit(1);
         }
@@ -72,7 +75,7 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
 
 
       case TOK_EOF:
-        if (((tree_t *) peek())->type != NODE_ROOT) {
+        if (((tree_t *) peek(stack))->type != NODE_ROOT) {
           puts("Unclosed sexpr");
           exit(1);
         }
@@ -87,6 +90,8 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
           p = p->sibling;
         }
 
+        free_stack(stack);
+        stack = NULL;
         return root;
         break;
     }

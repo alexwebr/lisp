@@ -4,12 +4,13 @@
 #define _STACK_H
 
 typedef struct stack_t {
-  struct stack_t *previous;
+  struct stack_t *next;
   tree_t *data;
 } stack_t;
 
-void *peek(void);
-void *pop(void);
-void push(void *data);
+void *peek(stack_t *stack);
+void *pop(stack_t *stack);
+void push(stack_t *stack, void *data);
+void free_stack(stack_t *stack);
 
 #endif

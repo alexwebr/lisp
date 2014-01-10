@@ -1,34 +1,42 @@
 #include "stack.h"
 #include "parser.h"
 
-static stack_t *stack = NULL;
-
-void push(void *data)
+void push(stack_t *stack, void *data)
 {
-  stack_t *p = malloc(sizeof(stack_t));
-  p->data = data;
-  p->previous = stack;
-  stack = p;
+  while (stack->next != NULL)
+    stack = stack->next;
+
+  stack->next = malloc(sizeof(stack_t));
+  stack->next->next = NULL;
+  stack->next->data = data;
 }
 
-void *peek(void)
+void *peek(stack_t *stack)
 {
-  if (stack == NULL)
-    return NULL;
+  while (stack->next != NULL)
+    stack = stack->next;
 
   return stack->data;
 }
 
-void *pop(void)
+void *pop(stack_t *stack)
 {
-  if (stack == NULL)
+  if (stack->next == NULL)
     return NULL;
 
-  // Save before freeing and returning
-  stack_t *p = stack;
-  void *data = p->data;
+  while (stack->next->next != NULL)
+    stack = stack->next;
 
-  stack = stack->previous;
-  free(p);
+  void *data = stack->next->data;
+
+  free(stack->next);
+  stack->next = NULL;
+
   return data;
+}
+
+void free_stack(stack_t *stack)
+{
+  while (pop(stack) != NULL);
+  free(stack);
 }
