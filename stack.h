@@ -8,8 +8,8 @@ typedef struct stack_t {
   tree_t *node;
 } stack_t;
 
-tree_t *peek(void);
-tree_t *pop(void);
-void push(tree_t *node);
+void *peek(void);
+void *pop(void);
+void push(void *node);
 
 #endif

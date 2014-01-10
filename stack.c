@@ -3,7 +3,7 @@
 
 static stack_t *stack = NULL;
 
-void push(tree_t *node)
+void push(void *node)
 {
   stack_t *p = malloc(sizeof(stack_t));
   p->node = node;
@@ -11,7 +11,7 @@ void push(tree_t *node)
   stack = p;
 }
 
-tree_t *peek(void)
+void *peek(void)
 {
   if (stack == NULL)
     return NULL;
@@ -19,14 +19,14 @@ tree_t *peek(void)
   return stack->node;
 }
 
-tree_t *pop(void)
+void *pop(void)
 {
   if (stack == NULL)
     return NULL;
 
   // Save before freeing and returning
   stack_t *p = stack;
-  tree_t *node = p->node;
+  void *node = p->node;
 
   stack = stack->previous;
   free(p);

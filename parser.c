@@ -70,7 +70,7 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
 
 
       case TOK_EOF:
-        if (peek()->type != NODE_ROOT) {
+        if (((tree_t *) peek())->type != NODE_ROOT) {
           puts("Unclosed sexpr");
           exit(1);
         }
