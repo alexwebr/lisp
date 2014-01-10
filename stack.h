@@ -5,11 +5,11 @@
 
 typedef struct stack_t {
   struct stack_t *previous;
-  tree_t *node;
+  tree_t *data;
 } stack_t;
 
 void *peek(void);
 void *pop(void);
-void push(void *node);
+void push(void *data);
 
 #endif

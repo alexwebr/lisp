@@ -3,10 +3,10 @@
 
 static stack_t *stack = NULL;
 
-void push(void *node)
+void push(void *data)
 {
   stack_t *p = malloc(sizeof(stack_t));
-  p->node = node;
+  p->data = data;
   p->previous = stack;
   stack = p;
 }
@@ -16,7 +16,7 @@ void *peek(void)
   if (stack == NULL)
     return NULL;
 
-  return stack->node;
+  return stack->data;
 }
 
 void *pop(void)
@@ -26,9 +26,9 @@ void *pop(void)
 
   // Save before freeing and returning
   stack_t *p = stack;
-  void *node = p->node;
+  void *data = p->data;
 
   stack = stack->previous;
   free(p);
-  return node;
+  return data;
 }
