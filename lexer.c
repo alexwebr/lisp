@@ -39,6 +39,7 @@ token_t lex_get_tok(char *buf, unsigned int buflen)
         if (strchr(integer_alphabet, c))
           state = STATE_INTEGER;
 
+        // If the lexer state was changed by the above comparisons
         if (state != STATE_S)
           tok_start = ci;
 
