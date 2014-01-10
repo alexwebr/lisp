@@ -1,14 +1,14 @@
 #include "parser.h"
 #include "stack.h"
 
-void append_child(tree_node_t *parent, tree_node_t *child)
+void append_child(tree_t *parent, tree_t *child)
 {
   if (parent->child == NULL) {
     parent->child = child;
     return;
   }
 
-  tree_node_t *p = parent->child;
+  tree_t *p = parent->child;
 
   while (p->sibling != NULL)
     p = p->sibling;
@@ -16,10 +16,10 @@ void append_child(tree_node_t *parent, tree_node_t *child)
   p->sibling = child;
 }
 
-tree_node_t *create_parse_tree(char *buf, unsigned int buflen)
+tree_t *create_parse_tree(char *buf, unsigned int buflen)
 {
   // Tree initialization
-  tree_node_t *root = malloc(sizeof(tree_node_t));
+  tree_t *root = malloc(sizeof(tree_t));
   root->type = NODE_ROOT;
   root->child = NULL;
   root->sibling = NULL;
@@ -28,14 +28,14 @@ tree_node_t *create_parse_tree(char *buf, unsigned int buflen)
   push(root);
 
   // Temporary pointer
-  tree_node_t *p;
+  tree_t *p;
 
   while (1) {
     token_t token = lex_get_tok(buf, buflen);
 
     switch (token.type) {
       case TOK_LPAREN:
-        p = malloc(sizeof(tree_node_t));
+        p = malloc(sizeof(tree_t));
         p->child = NULL;
         p->sibling = NULL;
         p->type = NODE_SEXPR;
@@ -49,7 +49,7 @@ tree_node_t *create_parse_tree(char *buf, unsigned int buflen)
       case TOK_IDENT:
       case TOK_INTEGER:
       case TOK_STRING:
-        p = malloc(sizeof(tree_node_t));
+        p = malloc(sizeof(tree_t));
         p->type = NODE_ATOM;
         p->token = token;
 

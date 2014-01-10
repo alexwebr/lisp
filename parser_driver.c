@@ -1,7 +1,7 @@
 #include "parser.h"
 
 // Recursive function that prints the tree :)
-void print_tree(unsigned int depth, tree_node_t *p)
+void print_tree(unsigned int depth, tree_t *p)
 {
   // Print the indentation
   unsigned int i = 0;
@@ -39,6 +39,6 @@ int main()
   while ((c = getchar()) != EOF)
     buf[i++] = c & 0xFF;
 
-  tree_node_t *p = create_parse_tree(buf, i);
+  tree_t *p = create_parse_tree(buf, i);
   print_tree(0, p);
 }
