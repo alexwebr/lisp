@@ -64,12 +64,18 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
 
 
       case TOK_RPAREN:
-        pop(stack);
+        p = pop(stack);
 
-        if (peek(stack) == NULL) {
+        if (p == NULL) {
           puts("Closed non-existent sexpr");
           exit(1);
         }
+
+        if (p->child == NULL) {
+          puts("Empty sexpr");
+          exit(1);
+        }
+
 
         break;
 
