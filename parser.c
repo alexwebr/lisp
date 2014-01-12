@@ -48,10 +48,14 @@ tree_t *create_parse_tree(char *buf, unsigned int buflen)
 
         break;
 
-
-      case TOK_IDENT:
       case TOK_INTEGER:
       case TOK_STRING:
+        if (((tree_t *)peek(stack))->child == NULL) {
+          puts("Sexpr does not begin with an identifier");
+          exit(1);
+        }
+
+      case TOK_IDENT:
         p = malloc(sizeof(tree_t));
         p->child = NULL;
         p->sibling = NULL;
